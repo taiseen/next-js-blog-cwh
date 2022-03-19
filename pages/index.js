@@ -5,7 +5,7 @@ import useFetchDB from './useFetchDB';
 
 export default function Home() {
 
-  const { allBlog } = useFetchDB('blogList')
+  const { allBlog } = useFetchDB('blogList');
 
   return (
     <main className={styles.container}>

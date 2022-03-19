@@ -1,10 +1,13 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import useFetchDB from './useFetchDB';
+import { useState } from 'react';
+// import useFetchDB from './useFetchDB';
 
-const Blog = () => {
+const Blog = ({allBlog}) => {
 
-  const { allBlog } = useFetchDB('blogList')
+  // const { allBlog } = useFetchDB('blogList');
+
+  const [blogList, setBlogList] = useState(allBlog);
 
   return (
     <section className="mt-14">
@@ -16,7 +19,7 @@ const Blog = () => {
       <div className="w-2/3 mx-auto pt-6">
         <h2 className="text-3xl font-bold mb-4">Latest Blog Posts</h2>
         {
-          allBlog.map((blog, i) => (
+          blogList.map((blog, i) => (
             <div key={i} className="mb-8">
               <Link href={`./blogPost/${blog.slug}`} passHref={true}>
                 <a>
@@ -35,6 +38,20 @@ const Blog = () => {
       </div>
     </section>
   )
+}
+
+// SSR ==> Server Site Rendering...
+export async function getServerSideProps(context) {
+
+  const url = `http://localhost:3000/api/blogList`;
+
+  const request = await fetch(url);
+  const allBlog = await request.json();
+
+  return {
+    props: { allBlog }, // will be passed to the page component as props
+  }
+  
 }
 
 export default Blog

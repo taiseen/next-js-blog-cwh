@@ -1,27 +1,27 @@
 import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
+// import { useRouter } from "next/router";
 import Link from 'next/link';
 import Head from 'next/head';;
 
-const Post = () => {
+const Post = ({post}) => {
 
-    const router = useRouter();
-    const { slug } = router.query;
+    // const router = useRouter();
+    // const { slug } = router.query;
 
-    const [blogPost, setBlogPost] = useState();
+    const [blogPost, setBlogPost] = useState(post);
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        if (!router.isReady) return;
+    //     if (!router.isReady) return;
 
-        const url = `http://localhost:3000/api/getBlog?slug=${slug}`;
+    //     const url = `http://localhost:3000/api/getBlog?slug=${slug}`;
 
-        fetch(url)
-            .then(res => res.json())
-            .then(data => setBlogPost(data))
-            .catch(err => console.log("Error Reading data " + err));
+    //     fetch(url)
+    //         .then(res => res.json())
+    //         .then(data => setBlogPost(data))
+    //         .catch(err => console.log("Error Reading data " + err));
 
-    }, [router.isReady])
+    // }, [router.isReady])
 
 
     return (
@@ -45,5 +45,22 @@ const Post = () => {
         </article>
     )
 }
+
+
+// SSR ==> Server Site Rendering...
+export async function getServerSideProps(context) {
+
+    const { slug } = context.query;
+    const url = `http://localhost:3000/api/getBlog?slug=${slug}`;
+
+    const request = await fetch(url);
+    const post = await request.json();
+
+    return {
+        props: { post }
+    }
+
+}
+
 
 export default Post
