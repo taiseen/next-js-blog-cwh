@@ -22,7 +22,7 @@ const useFetchDB = (endPoint) => {
 
         getData();
 
-    }, []);
+    }, [endPoint]);
 
     return { allBlog };
 }

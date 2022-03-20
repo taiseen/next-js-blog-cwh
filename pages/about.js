@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import Image from 'next/image';
+// import Image from 'next/image';
 
 const about = () => {
   return (
@@ -11,7 +11,9 @@ const about = () => {
       <div className="my-16 flex justify-center flex-wrap md:justify-between  px-4">
         
         <div className="p-2 m-2 rounded">
-          <Image src="/me.jpg" alt="" width={350} height={350} className="rounded"/>
+          {/* <Image src="/me.jpg" alt="" width={350} height={350} className="rounded"/> */}
+          
+          <img src="/me.jpg" alt="" width={350} height={350} className="rounded"/>
         </div>
 
         <div className="w-[500px] flex-grow p-2 m-2">

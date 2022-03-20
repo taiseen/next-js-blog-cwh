@@ -2,8 +2,10 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useState } from 'react';
 // import useFetchDB from './useFetchDB';
+import * as fs from 'fs';
 
-const Blog = ({allBlog}) => {
+
+const Blog = ({ allBlog }) => {
 
   // const { allBlog } = useFetchDB('blogList');
 
@@ -40,7 +42,10 @@ const Blog = ({allBlog}) => {
   )
 }
 
-// SSR ==> Server Site Rendering...
+
+
+/*
+SSR ==> Server Side Rendering...
 export async function getServerSideProps(context) {
 
   const url = `http://localhost:3000/api/blogList`;
@@ -53,5 +58,29 @@ export async function getServerSideProps(context) {
   }
   
 }
+*/
 
-export default Blog
+
+
+// SSG ==> Static Site Generation...
+export async function getStaticProps(context) {
+
+  let data = await fs.promises.readdir('blogJsonDB');
+
+  let blog;
+  let allBlog = [];
+
+  for (let i = 0; i < data.length; i++) {
+    const singlePost = data[i];
+    blog = await fs.promises.readFile(('blogJsonDB/' + singlePost), 'utf-8');
+    allBlog.push(JSON.parse(blog));
+  }
+  
+  return {
+    props: { allBlog }
+  }
+
+}
+
+
+export default Blog;

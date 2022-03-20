@@ -1,9 +1,12 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+// import { useEffect } from "react";
 // import { useRouter } from "next/router";
 import Link from 'next/link';
 import Head from 'next/head';;
+import * as fs from 'fs';
 
-const Post = ({post}) => {
+
+const Post = ({ post }) => {
 
     // const router = useRouter();
     // const { slug } = router.query;
@@ -46,8 +49,8 @@ const Post = ({post}) => {
     )
 }
 
-
-// SSR ==> Server Site Rendering...
+/*
+SSR ==> Server Side Rendering...
 export async function getServerSideProps(context) {
 
     const { slug } = context.query;
@@ -61,6 +64,37 @@ export async function getServerSideProps(context) {
     }
 
 }
+*/
 
 
-export default Post
+
+
+
+// SSG ==> Static Site Generation...
+export async function getStaticPaths() {
+    return {
+        paths: [
+            { params: { slug: 'how-to-install-tailwindcss-in-react' } },
+            { params: { slug: 'next-js-image-components' } },
+            { params: { slug: 'react-router-v6' } },
+        ],
+        fallback: true
+    }
+}
+
+
+// SSG ==> Static Site Generation...
+export async function getStaticProps(context) {
+
+    const { slug } = context.params;
+
+    let post = await fs.promises.readFile(`blogJsonDB/${slug}.json`, "utf-8");
+
+    return {
+        props: { post: JSON.parse(post) }
+    }
+
+}
+
+
+export default Post;

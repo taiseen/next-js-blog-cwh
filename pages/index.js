@@ -1,14 +1,15 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import styles from '../styles/Home.module.css'
-import useFetchDB from './useFetchDB';
+// import useFetchDB from './useFetchDB';
+import * as fs from 'fs';
 
-export default function Home() {
 
-  const { allBlog } = useFetchDB('blogList');
+export default function Home({allBlog}) {
+
+  // const { allBlog } = useFetchDB('blogList');
 
   return (
-    <main className={styles.container}>
+    <main>
 
       <Head>
         <title>Home</title>
@@ -36,4 +37,25 @@ export default function Home() {
       </div>
     </main>
   )
+}
+
+
+// SSG ==> Static Site Generation...
+export async function getStaticProps(context) {
+
+  let data = await fs.promises.readdir('blogJsonDB');
+
+  let blog;
+  let allBlog = [];
+
+  for (let i = 0; i < data.length; i++) {
+    const singlePost = data[i];
+    blog = await fs.promises.readFile(('blogJsonDB/' + singlePost), 'utf-8');
+    allBlog.push(JSON.parse(blog));
+  }
+  
+  return {
+    props: { allBlog }
+  }
+
 }
