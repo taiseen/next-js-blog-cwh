@@ -4,7 +4,7 @@ import Link from 'next/link'
 import * as fs from 'fs';
 
 
-export default function Home({allBlog}) {
+export default function Home({ allBlog }) {
 
   // const { allBlog } = useFetchDB('blogList');
 
@@ -18,7 +18,7 @@ export default function Home({allBlog}) {
       </Head>
 
       <div className="mt-14">
-        <h1 className="text-3xl font-bold text-red-400 text-center pt-8">
+        <h1 className="text-lg md:text-3xl font-bold text-red-400 text-center pt-8">
           👋 &lt; Welcome to tech blog... /&gt; 📐
         </h1>
 
@@ -28,7 +28,7 @@ export default function Home({allBlog}) {
             {
               allBlog.map(blog => (
                 <Link href={`./blogPost/${blog.slug}`} key={blog.title}>
-                  <a className="text-2xl text-red-500 block">{blog.title}</a>
+                  <a className="text-lg md:text-2xl text-red-500 block hover:underline underline-offset-4 duration-300 hover:text-red-600">{blog.title}</a>
                 </Link>
               ))
             }
@@ -53,7 +53,7 @@ export async function getStaticProps(context) {
     blog = await fs.promises.readFile(('blogJsonDB/' + singlePost), 'utf-8');
     allBlog.push(JSON.parse(blog));
   }
-  
+
   return {
     props: { allBlog }
   }

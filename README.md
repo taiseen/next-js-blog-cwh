@@ -34,15 +34,17 @@ yarn dev
 </a>
 ```
 
-```  
+```
 "scripts": {
     ...
     "export": "next build && next export"
 },
 ```
-+ yarn export
 
+* yarn export
 
 `trailingSlash: true,` ==> in `next.config.js` file for `SSG` link working + reload/refresh working properly.
 
+<br/>
 
+<video src="./demo.mp4" width="100%" height="100%" controls>

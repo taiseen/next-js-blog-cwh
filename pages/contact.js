@@ -61,19 +61,19 @@ const Contact = () => {
 
         <form action="" className="space-y-4" onSubmit={handleSubmit}>
           <input type="text" placeholder="Name" id="name" name="name"
-            value={user.name} onChange={handleChange} required
+            value={user.name} onChange={handleChange} required autoComplete="off"
             className="w-full py-2 px-3 rounded outline-gray-500" />
 
           <input type="phone" placeholder="Phone" id="phone" name="phone"
-            value={user.phone} onChange={handleChange} required
+            value={user.phone} onChange={handleChange} required autoComplete="off" 
             className="w-full py-2 px-3 rounded outline-gray-500" />
 
           <input type="email" placeholder="Email" id="email" name="email"
-            value={user.email} onChange={handleChange} required
+            value={user.email} onChange={handleChange} required autoComplete="off"
             className="w-full py-2 px-3 rounded outline-gray-500" />
 
           <textarea type="text" placeholder="Comment" id="desc" name="desc"
-            value={user.decs} onChange={handleChange} required
+            value={user.decs} onChange={handleChange} required autoComplete="off"
             className="w-full py-2 px-3 rounded outline-gray-500 resize-none h-32">{user.decs}</textarea>
 
           <div className="flex justify-between">
