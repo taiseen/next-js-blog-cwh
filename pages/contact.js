@@ -11,10 +11,19 @@ const Contact = () => {
     setUser({ ...user, [e.target.name]: e.target.value })
   }
 
+  const clearAll = (e) => {
+    setUser({ name: '', phone: '', email: '', desc: '' });
+    
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    e.target.reset();
+    clearAll();
     console.log(user)
   }
+
+
 
   return (
     <section className="mt-14">
@@ -43,8 +52,10 @@ const Contact = () => {
             value={user.decs} onChange={handleChange}
             className="w-full py-2 px-3 rounded outline-gray-500 resize-none h-32" />
 
-          <div className="text-right">
-            <button className="py-2 px-4 bg-blue-500 rounded shadow hover:bg-blue-600 hover:text-white duration-300">Submit</button>
+          <div className="flex justify-between">
+            <button className="py-2 px-4 bg-blue-500 rounded shadow hover:bg-red-500 hover:text-white duration-300" onClick={clearAll}>Reset</button>
+
+            <button className="py-2 px-4 bg-blue-500 rounded shadow hover:bg-green-500 hover:text-white duration-300">Submit</button>
           </div>
         </form>
       </div>
