@@ -19,7 +19,7 @@ export default function Home({allBlog}) {
 
       <div className="mt-14">
         <h1 className="text-3xl font-bold text-red-400 text-center pt-8">
-          👋 Welcome to tech blog... 📐
+          👋 &lt; Welcome to tech blog... /&gt; 📐
         </h1>
 
         <div className='w-1/2 mx-auto'>

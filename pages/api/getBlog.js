@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 
-// http://localhost:3000/api/getBlog?slug=react-router-v6"
+// http://localhost:3000/api/getBlog?slug=react-router-v6
 
 export default function handler(req, res) {
 
