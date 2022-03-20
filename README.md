@@ -47,10 +47,10 @@ yarn dev
 
 <br/>
 
-<video src="./demo.mp4" controls style="width: 100%; height: 100%; " />
+<!-- <video src="./demo.mp4" controls style="width: 100%; height: 100%; " />
 
 # [Demo video](https://vimeo.com/690287431)
 
-<br/>
+<br/> -->
 
 <img src="./demo.gif" style="width: 100%; height: 100%; " />
